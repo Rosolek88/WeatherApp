@@ -3,14 +3,26 @@ const submitBtn = document.getElementById('submit-btn')
 const input = document.getElementById('input')
 const summary = document.getElementById('summary')
 const temperature = document.getElementById('temperature')
-
-submitBtn.addEventListener('click', async ()=>{
-    summary.textContent = "loading..."
+const place = document.getElementById('place')
+async function Boss (){
+    summary.textContent = "Loading..."
     temperature.textContent =""
-    let response = await fetch(`http://localhost:3000/weather?location=${input.value}`)
+    let response = await fetch(`/weather?location=${input.value}`)
     let data = await response.json()
+    console.log(data)
     
-    summary.textContent =  data.summary
-    temperature.textContent =  `${Math.floor((data.temperature-32)*(5/9))}°C`
+    place.textContent = data.placeData
+    summary.textContent =  data.weatherData.summary
+    temperature.textContent =  `${Math.floor((data.weatherData.temperature-32)*(5/9))}°C` 
+  console.log('hello')
 
+}
+submitBtn.addEventListener('click', async ()=>{
+  
+ Boss();
 })
+
+input.addEventListener('keypress', async  (event)=>{
+    if (event.keyCode === 13){
+ Boss();
+} } )
