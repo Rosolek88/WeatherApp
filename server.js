@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require ('path')
 const {main} = require('./lib/app')
+
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -14,3 +16,4 @@ app.get('/weather', async (req, res)=>{
 app.listen(port, ()=> {
     console.log(`listening on port ${port}`)
 })
+
